@@ -5,9 +5,12 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
 import Dashboard from './components/dashboard/Dashboard'
 import MenuSignIn from './components/nav/MenuSignIn'
 import MenuSignOut from './components/nav/MenuSignOut'
+import PageOne from './components/pages/PageOne'
 
 
 firebase.initializeApp({
@@ -43,23 +46,28 @@ componentDidMount = () => {
 
   render() {
     return (
-      <div className="App">
-        {this.state.isSignedIn ? (
-          <div>
-            <MenuSignIn />
-            <Dashboard />
-          </div>
-        ) : (
-          <div>
-            <MenuSignOut />
-            <h1 className="mb-3">Faça Login</h1>
-            <StyledFirebaseAuth
-              uiConfig = { this.uiConfig }
-              firebaseAuth = { firebase.auth() }
-            />
-          </div>
-        )}
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          {this.state.isSignedIn ? (
+            <Switch>
+              <div>
+                <MenuSignIn />
+                <Route exact path='/' component={Dashboard} />
+                <Route path='/pageone' component={PageOne} />
+              </div>
+            </Switch>
+          ) : (
+              <div>
+                <MenuSignOut />
+                <h1 className="mb-3">Faça Login</h1>
+                <StyledFirebaseAuth
+                  uiConfig={this.uiConfig}
+                  firebaseAuth={firebase.auth()}
+                />
+              </div>
+            )}
+        </div>
+      </BrowserRouter>
     )
   }
 }
