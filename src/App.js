@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+
+import Dashboard from './components/dashboard/Dashboard'
+import MenuSignIn from './components/nav/MenuSignIn'
+import MenuSignOut from './components/nav/MenuSignOut'
 
 
 firebase.initializeApp({
@@ -17,7 +22,7 @@ firebase.initializeApp({
 })
 
 class App extends Component {
-  state = { isSignedIn: false }
+  state = { signInSuccessWithAuthResult: false }
   
   uiConfig = {
     signInFlow: "popup",
@@ -26,7 +31,7 @@ class App extends Component {
       firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
-      signInSuccess: () => false
+      signInSuccessWithAuthResult: () => false
     }
   }
 
@@ -41,16 +46,18 @@ componentDidMount = () => {
       <div className="App">
         {this.state.isSignedIn ? (
           <div>
-            <div>Signed In!</div>
-            <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
-            <h1>Bem-Vindo { firebase.auth().currentUser.displayName }</h1>
-            <img alt="profile picture" src={ firebase.auth().currentUser.photoURL } />
+            <MenuSignIn />
+            <Dashboard />
           </div>
         ) : (
-          <StyledFirebaseAuth
-            uiConfig = { this.uiConfig }
-            firebaseAuth = { firebase.auth() }
-          />
+          <div>
+            <MenuSignOut />
+            <h1 className="mb-3">Faça Login</h1>
+            <StyledFirebaseAuth
+              uiConfig = { this.uiConfig }
+              firebaseAuth = { firebase.auth() }
+            />
+          </div>
         )}
       </div>
     )
