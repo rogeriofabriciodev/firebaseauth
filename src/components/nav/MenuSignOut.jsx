@@ -11,11 +11,6 @@ const MenuSignOut = () => {
           <Nav className="mr-auto">
             
           </Nav>
-          <Nav>
-            {/* <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-            </Nav.Link> */}
-          </Nav>
         </Navbar.Collapse>
       </Navbar>
     </div>

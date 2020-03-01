@@ -6,7 +6,7 @@ import 'firebase/auth'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 
 import Dashboard from './components/dashboard/Dashboard'
-import Menu from './components/nav/Menu'
+import MenuSignIn from './components/nav/MenuSignIn'
 import MenuSignOut from './components/nav/MenuSignOut'
 
 
@@ -46,7 +46,7 @@ componentDidMount = () => {
       <div className="App">
         {this.state.isSignedIn ? (
           <div>
-            <Menu />
+            <MenuSignIn />
             <Dashboard />
           </div>
         ) : (

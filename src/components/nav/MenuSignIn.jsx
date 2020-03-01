@@ -3,7 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import { Navbar, NavDropdown, Nav, Image, Row, Col } from 'react-bootstrap'
 
-const Menu = () => {
+const MenuSignIn = () => {
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -36,4 +36,4 @@ const Menu = () => {
   )
 }
 
-export default Menu
+export default MenuSignIn
